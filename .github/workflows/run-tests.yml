@@ -1,0 +1,23 @@
+name: run-tests
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                dotnet-version:
+                    - 5.0.x
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-dotnet@v1.7.2
+              with:
+                  dotnet-version: ${{ matrix.dotnet-version }}
+            - run: dotnet restore
+            - run: dotnet build
+            - run: dotnet test
