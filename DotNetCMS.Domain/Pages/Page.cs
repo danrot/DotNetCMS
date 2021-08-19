@@ -12,5 +12,10 @@ namespace DotNetCMS.Domain.Pages
 		{
 			Title = title;
 		}
+
+		public void ChangeTitle(string title)
+		{
+			Title = title;
+		}
 	}
 }

@@ -14,5 +14,15 @@ namespace DotNetCMS.Domain.Tests.Pages
 			Assert.Equal(title, page.Title);
 			Assert.NotEqual(Guid.Empty, page.Id);
 		}
+
+		[Fact]
+		public void ChangeTitle()
+		{
+			var page = new Page("Page Title");
+			Assert.Equal("Page Title", page.Title);
+
+			page.ChangeTitle("Updated Page Title");
+			Assert.Equal("Updated Page Title", page.Title);
+		}
 	}
 }
