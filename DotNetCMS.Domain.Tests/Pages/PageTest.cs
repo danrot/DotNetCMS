@@ -1,4 +1,5 @@
 using DotNetCMS.Domain.Pages;
+using System;
 using Xunit;
 
 namespace DotNetCMS.Domain.Tests.Pages
@@ -11,6 +12,7 @@ namespace DotNetCMS.Domain.Tests.Pages
 		{
 			var page = new Page(title);
 			Assert.Equal(title, page.Title);
+			Assert.NotEqual(Guid.Empty, page.Id);
 		}
 	}
 }
