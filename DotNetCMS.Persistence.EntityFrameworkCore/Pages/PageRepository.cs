@@ -19,9 +19,14 @@ namespace DotNetCMS.Persistence.EntityFrameworkCore.Pages
 			_cmsContext.Pages.Add(page);
 		}
 
+		public void Remove(Page page)
+		{
+			_cmsContext.Pages.Remove(page);
+		}
+
 		public Task<Page> GetByIdAsync(Guid id)
 		{
-			return _cmsContext.Pages.SingleAsync(page => page.Id == id);
+			return _cmsContext.Pages.SingleOrDefaultAsync(page => page.Id == id);
 		}
 	}
 }
