@@ -23,3 +23,5 @@ project.
 - Since persistence is not included in `DotNetCMS.Domain` something other than EntityFrameworkCore could be used.
 - Tests for all possible persistence implementations can be included in the `DotNetCMS.Persistence.Test` by inheriting
 from the base test class and only implement the construction of the `PageRepository`.
+- The `Repository` classes feel like a very thin wrapper around the `DbContext`, but it is still worth it, because
+otherwise the `DotNetCMS.Domain` would be coupled to EntityFrameworkCore, which is not desirable.
