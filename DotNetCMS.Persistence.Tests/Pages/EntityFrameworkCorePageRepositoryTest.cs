@@ -8,7 +8,7 @@ namespace DotNetCMS.Persistence.Test.Pages
 {
 	public abstract class EntityFrameworkCorePageRepositoryTest : PageRepositoryTest, IDisposable
 	{
-		private DbContextOptions<CmsContext> _options;
+		private readonly DbContextOptions<CmsContext> _options;
 
 		private CmsContext _context;
 

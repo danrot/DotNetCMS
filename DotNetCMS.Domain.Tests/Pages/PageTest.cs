@@ -4,7 +4,7 @@ using Xunit;
 
 namespace DotNetCMS.Domain.Tests.Pages
 {
-	public class PageTest
+	public sealed class PageTest
 	{
 		[Theory]
 		[InlineData("Page Title 1"), InlineData("Page Title 2")]
