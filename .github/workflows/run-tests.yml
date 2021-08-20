@@ -9,11 +9,15 @@ on:
 jobs:
     test:
         runs-on: ubuntu-latest
+        env:
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
         strategy:
             matrix:
                 dotnet-version:
                     - 5.0.x
         steps:
+            - run: sudo /etc/init.d/mysql start
             - uses: actions/checkout@v2
             - uses: actions/setup-dotnet@v1.7.2
               with:

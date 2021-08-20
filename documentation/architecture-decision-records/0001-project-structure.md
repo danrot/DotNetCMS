@@ -38,4 +38,4 @@ implementation to be extended with assemblies resp. packages. But at the moment 
 single project will speed up development.
 - Multiple projects [provide a good boundary for code isolation](https://stackoverflow.com/a/2658726/1292378).
 - Multiple projects [might cause classes to be clustered, because developers might not understand how they are
-split](https://stackoverflow.com/a/2658726/1292378)
+split](https://stackoverflow.com/a/2658726/1292378).
