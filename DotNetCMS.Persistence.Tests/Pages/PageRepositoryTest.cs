@@ -68,8 +68,8 @@ namespace DotNetCMS.Persistence.Test.Pages
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			Assert.Equal("Page Title 1", (await pageRepository.GetByIdAsync(pageId1)).Title);
-			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2)).Title);
+			Assert.Equal("Page Title 1", (await pageRepository.GetByIdAsync(pageId1))!.Title);
+			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2))!.Title);
 		}
 
 		[Fact]
@@ -91,8 +91,8 @@ namespace DotNetCMS.Persistence.Test.Pages
 			pageRepository = CreatePageRepository();
 			page1 = await pageRepository.GetByIdAsync(pageId1);
 			page2 = await pageRepository.GetByIdAsync(pageId2);
-			Assert.Equal("Page Title 1", page1.Title);
-			Assert.Equal("Page Title 2", page2.Title);
+			Assert.Equal("Page Title 1", page1!.Title);
+			Assert.Equal("Page Title 2", page2!.Title);
 
 			page1.ChangeTitle("Updated Page Title 1");
 
@@ -100,8 +100,8 @@ namespace DotNetCMS.Persistence.Test.Pages
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			Assert.Equal("Updated Page Title 1", (await pageRepository.GetByIdAsync(pageId1)).Title);
-			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2)).Title);
+			Assert.Equal("Updated Page Title 1", (await pageRepository.GetByIdAsync(pageId1))!.Title);
+			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2))!.Title);
 		}
 
 		[Fact]
@@ -123,8 +123,8 @@ namespace DotNetCMS.Persistence.Test.Pages
 			pageRepository = CreatePageRepository();
 			page1 = await pageRepository.GetByIdAsync(pageId1);
 			page2 = await pageRepository.GetByIdAsync(pageId2);
-			Assert.Equal("Page Title 1", page1.Title);
-			Assert.Equal("Page Title 2", page2.Title);
+			Assert.Equal("Page Title 1", page1!.Title);
+			Assert.Equal("Page Title 2", page2!.Title);
 
 			pageRepository.Remove(page1);
 
@@ -133,7 +133,7 @@ namespace DotNetCMS.Persistence.Test.Pages
 
 			pageRepository = CreatePageRepository();
 			Assert.Null(await pageRepository.GetByIdAsync(pageId1));
-			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2)).Title);
+			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2))!.Title);
 		}
 	}
 }

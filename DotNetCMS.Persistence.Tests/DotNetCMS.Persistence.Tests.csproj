@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DotNetCMS.Persistence.EntityFrameworkCore\DotNetCMS.Persistence.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DotNetCMS.Persistence.Memory\DotNetCMS.Persistence.Memory.csproj" />
   </ItemGroup>
 
 </Project>

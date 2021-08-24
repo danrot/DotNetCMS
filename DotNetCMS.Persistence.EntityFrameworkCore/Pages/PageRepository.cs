@@ -25,9 +25,10 @@ namespace DotNetCMS.Persistence.EntityFrameworkCore.Pages
 			_cmsContext.Pages.Remove(page);
 		}
 
-		public Task<Page> GetByIdAsync(Guid id)
+		public Task<Page?> GetByIdAsync(Guid id)
 		{
-			return _cmsContext.Pages.SingleOrDefaultAsync(page => page.Id == id);
+			// TODO remove the null-forgiving operator once updated to EFCore 6
+			return _cmsContext.Pages.SingleOrDefaultAsync(page => page.Id == id)!;
 		}
 
 		public Task<List<Page>> GetAllAsync()
