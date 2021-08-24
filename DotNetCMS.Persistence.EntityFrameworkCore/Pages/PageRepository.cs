@@ -1,6 +1,7 @@
 using DotNetCMS.Domain.Pages;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DotNetCMS.Persistence.EntityFrameworkCore.Pages
@@ -27,6 +28,11 @@ namespace DotNetCMS.Persistence.EntityFrameworkCore.Pages
 		public Task<Page> GetByIdAsync(Guid id)
 		{
 			return _cmsContext.Pages.SingleOrDefaultAsync(page => page.Id == id);
+		}
+
+		public Task<List<Page>> GetAllAsync()
+		{
+			return _cmsContext.Pages.ToListAsync();
 		}
 	}
 }

@@ -13,6 +13,45 @@ namespace DotNetCMS.Persistence.Test.Pages
 		protected abstract void Clear();
 
 		[Fact]
+		public async void GetByNonExistingId()
+		{
+			var pageRepository = CreatePageRepository();
+
+			Assert.Null(await pageRepository.GetByIdAsync(Guid.NewGuid()));
+		}
+
+		[Fact]
+		public async void GetAllEmpty()
+		{
+			var pageRepository = CreatePageRepository();
+
+			Assert.Empty(await pageRepository.GetAllAsync());
+		}
+
+		[Fact]
+		public async void GetAllNonEmpty()
+		{
+			var pageRepository = CreatePageRepository();
+
+			var page1 = new Page("Page Title 1");
+			Guid pageId1 = page1.Id;
+			var page2 = new Page("Page Title 2");
+			Guid pageId2 = page2.Id;
+
+			pageRepository.Add(page1);
+			pageRepository.Add(page2);
+
+			SaveChanges();
+			Clear();
+
+			pageRepository = CreatePageRepository();
+			var pages = await pageRepository.GetAllAsync();
+			Assert.Equal(2, pages.Count);
+			Assert.Contains(pages, page => page.Title == "Page Title 1");
+			Assert.Contains(pages, page => page.Title == "Page Title 2");
+		}
+
+		[Fact]
 		public async void Add()
 		{
 			var pageRepository = CreatePageRepository();
