@@ -1,6 +1,7 @@
 using DotNetCMS.Application.Pages;
 using DotNetCMS.Domain.Pages;
 using DotNetCMS.Persistence.EntityFrameworkCore;
+using DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore;
 using DotNetCMS.Persistence.EntityFrameworkCore.Pages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +25,11 @@ namespace DotNetCMS.Rest
 		{
 			string connectionString = _configuration.GetConnectionString("DotNetCMS");
 
-			services.AddControllers();
+			services.AddControllers(options =>
+			{
+				options.Filters.Add(typeof(TransactionFilter));
+			});
+
 			services.AddDbContext<CmsContext>(
 				options => options.UseMySql(
 					connectionString,
@@ -32,18 +37,17 @@ namespace DotNetCMS.Rest
 					sqlOptions => sqlOptions.MigrationsAssembly("DotNetCMS.Rest")
 				)
 			);
+
 			services.AddScoped<IPageRepository, PageRepository>();
 			services.AddScoped<PageService>();
 		}
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CmsContext context)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
-			context.Database.Migrate();
 
 			app.UseRouting();
 

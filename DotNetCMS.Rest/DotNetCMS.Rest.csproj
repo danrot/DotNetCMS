@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetCMS.Application\DotNetCMS.Application.csproj" />
     <ProjectReference Include="..\DotNetCMS.Persistence.EntityFrameworkCore\DotNetCMS.Persistence.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore\DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
