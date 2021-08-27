@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCMS.Rest.Tests", "Dot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore", "DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore\DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore.csproj", "{91770899-F121-404C-B69C-B1CD59044D5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCMS.Program", "DotNetCMS.Program\DotNetCMS.Program.csproj", "{08352DB3-2B94-40D5-B236-146395F06FC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCMS.Program.Tests", "DotNetCMS.Program.Tests\DotNetCMS.Program.Tests.csproj", "{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,5 +160,29 @@ Global
 		{91770899-F121-404C-B69C-B1CD59044D5F}.Release|x64.Build.0 = Release|Any CPU
 		{91770899-F121-404C-B69C-B1CD59044D5F}.Release|x86.ActiveCfg = Release|Any CPU
 		{91770899-F121-404C-B69C-B1CD59044D5F}.Release|x86.Build.0 = Release|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Debug|x64.Build.0 = Debug|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Debug|x86.Build.0 = Debug|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Release|x64.ActiveCfg = Release|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Release|x64.Build.0 = Release|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{08352DB3-2B94-40D5-B236-146395F06FC8}.Release|x86.Build.0 = Release|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Debug|x64.Build.0 = Debug|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Debug|x86.Build.0 = Debug|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Release|x64.ActiveCfg = Release|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Release|x64.Build.0 = Release|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Release|x86.ActiveCfg = Release|Any CPU
+		{B8DC9DAB-3190-4F30-81A6-B9435CC5F725}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

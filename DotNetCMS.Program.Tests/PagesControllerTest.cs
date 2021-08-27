@@ -9,7 +9,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Xunit;
 
-namespace DotNetCMS.Rest.Tests.Controllers
+namespace DotNetCMS.Program.Tests
 {
 	public sealed class PagesControllerMySqlTest
 	{

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DotNetCMS.Rest.Migrations
+namespace DotNetCMS.Program.Migrations
 {
-    public partial class Page : Migration
+    public partial class PageTitle : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

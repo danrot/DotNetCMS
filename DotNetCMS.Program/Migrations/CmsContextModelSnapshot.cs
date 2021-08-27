@@ -3,16 +3,14 @@ using System;
 using DotNetCMS.Persistence.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DotNetCMS.Rest.Migrations
+namespace DotNetCMS.Program.Migrations
 {
     [DbContext(typeof(CmsContext))]
-    [Migration("20210823115434_Page")]
-    partial class Page
+    partial class CmsContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -21,9 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotNetCMS.Persistence.Memory\DotNetCMS.Persistence.Memory.csproj" />
-    <ProjectReference Include="..\DotNetCMS.Application\DotNetCMS.Application.csproj" />
-    <ProjectReference Include="..\DotNetCMS.Rest\DotNetCMS.Rest.csproj" />
+    <ProjectReference Include="..\DotNetCMS.Persistence.EntityFrameworkCore\DotNetCMS.Persistence.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DotNetCMS.Program\DotNetCMS.Program.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace DotNetCMS.Rest
+namespace DotNetCMS.Program
 {
 	public class Startup
 	{
@@ -34,7 +34,7 @@ namespace DotNetCMS.Rest
 				options => options.UseMySql(
 					connectionString,
 					ServerVersion.AutoDetect(connectionString),
-					sqlOptions => sqlOptions.MigrationsAssembly("DotNetCMS.Rest")
+					sqlOptions => sqlOptions.MigrationsAssembly("DotNetCMS.Program")
 				)
 			);
 

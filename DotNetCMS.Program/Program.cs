@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace DotNetCMS.Rest
+namespace DotNetCMS.Program
 {
 	public class Program
 	{
