@@ -53,7 +53,7 @@ namespace DotNetCMS.Program.Tests
 			Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 			var contentDocument = await response.Content.ReadFromJsonAsync<JsonDocument>();
 
-			Assert.Empty(contentDocument.RootElement.EnumerateArray());
+			Assert.Empty(contentDocument!.RootElement.EnumerateArray());
 		}
 
 		[Fact]
@@ -67,7 +67,7 @@ namespace DotNetCMS.Program.Tests
 			Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 			var contentDocument = await response.Content.ReadFromJsonAsync<JsonDocument>();
 
-			var pages = contentDocument.RootElement.EnumerateArray().ToArray();
+			var pages = contentDocument!.RootElement.EnumerateArray().ToArray();
 
 			Assert.Equal(2, pages.Length);
 			Assert.Contains(pages, page => page.GetProperty("title").GetString() == "Page Title 1");
@@ -79,13 +79,13 @@ namespace DotNetCMS.Program.Tests
 		{
 			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title"});
 			var postContentDocument = await postResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			var pageId = postContentDocument.RootElement.GetProperty("id").GetGuid();
+			var pageId = postContentDocument!.RootElement.GetProperty("id").GetGuid();
 
 			var response = await _client.GetAsync($"/Pages/{pageId}");
 			Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
 			var contentDocument = await response.Content.ReadFromJsonAsync<JsonDocument>();
-			Assert.Equal(pageId, contentDocument.RootElement.GetProperty("id").GetGuid());
+			Assert.Equal(pageId, contentDocument!.RootElement.GetProperty("id").GetGuid());
 			Assert.Equal("Page Title", contentDocument.RootElement.GetProperty("title").GetString());
 		}
 
@@ -101,7 +101,7 @@ namespace DotNetCMS.Program.Tests
 		{
 			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
 			var postContentDocument = await postResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			var pageId = postContentDocument.RootElement.GetProperty("id").GetGuid();
+			var pageId = postContentDocument!.RootElement.GetProperty("id").GetGuid();
 
 			Assert.Equal(new Uri($"http://localhost/Pages/{pageId}"), postResponse.Headers.Location);
 			Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
@@ -113,7 +113,7 @@ namespace DotNetCMS.Program.Tests
 			Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
 			var getContentDocument = await getResponse.Content.ReadFromJsonAsync<JsonDocument>();
 
-			Assert.Equal(pageId, getContentDocument.RootElement.GetProperty("id").GetGuid());
+			Assert.Equal(pageId, getContentDocument!.RootElement.GetProperty("id").GetGuid());
 			Assert.Equal("Page Title 1", getContentDocument.RootElement.GetProperty("title").GetString());
 		}
 
@@ -129,12 +129,12 @@ namespace DotNetCMS.Program.Tests
 		{
 			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
 			var postContentDocument = await postResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			var pageId = postContentDocument.RootElement.GetProperty("id").GetGuid();
+			var pageId = postContentDocument!.RootElement.GetProperty("id").GetGuid();
 			Assert.Equal("Page Title 1", postContentDocument.RootElement.GetProperty("title").GetString());
 
 			var getResponse1 = await _client.GetAsync($"/Pages/{pageId}");
 			var getContentDocument1 = await getResponse1.Content.ReadFromJsonAsync<JsonDocument>();
-			Assert.Equal("Page Title 1", getContentDocument1.RootElement.GetProperty("title").GetString());
+			Assert.Equal("Page Title 1", getContentDocument1!.RootElement.GetProperty("title").GetString());
 
 			var putResponse = await _client.PutAsJsonAsync(
 				$"/Pages/{pageId}",
@@ -142,11 +142,11 @@ namespace DotNetCMS.Program.Tests
 			);
 			Assert.Equal(HttpStatusCode.OK, putResponse.StatusCode);
 			var putContentDocument = await putResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			Assert.Equal("Updated Page Title 1", putContentDocument.RootElement.GetProperty("title").GetString());
+			Assert.Equal("Updated Page Title 1", putContentDocument!.RootElement.GetProperty("title").GetString());
 
 			var getResponse2 = await _client.GetAsync($"/Pages/{pageId}");
 			var getContentDocument2 = await getResponse2.Content.ReadFromJsonAsync<JsonDocument>();
-			Assert.Equal("Updated Page Title 1", getContentDocument2.RootElement.GetProperty("title").GetString());
+			Assert.Equal("Updated Page Title 1", getContentDocument2!.RootElement.GetProperty("title").GetString());
 		}
 
 		[Fact]
@@ -177,7 +177,7 @@ namespace DotNetCMS.Program.Tests
 		{
 			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
 			var postContentDocument = await postResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			var pageId = postContentDocument.RootElement.GetProperty("id").GetGuid();
+			var pageId = postContentDocument!.RootElement.GetProperty("id").GetGuid();
 
 			var getResponse1 = await _client.GetAsync($"/Pages/{pageId}");
 			Assert.Equal(HttpStatusCode.OK, getResponse1.StatusCode);

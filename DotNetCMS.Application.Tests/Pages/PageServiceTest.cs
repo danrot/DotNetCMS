@@ -82,7 +82,7 @@ namespace DotNetCMS.Application.Test.Pages
 			Assert.Equal("Updated Page Title", page.Title);
 
 			page = await _pageRepository.GetByIdAsync(pageId);
-			Assert.Equal(pageId, page.Id);
+			Assert.Equal(pageId, page!.Id);
 			Assert.Equal("Updated Page Title", page.Title);
 		}
 

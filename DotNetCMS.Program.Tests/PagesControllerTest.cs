@@ -32,7 +32,7 @@ namespace DotNetCMS.Program.Tests
 
 			_client = _server.CreateClient();
 
-			using (var cmsContext = (CmsContext) _server.Host.Services.GetService(typeof(CmsContext)))
+			using (var cmsContext = (CmsContext) _server.Host.Services.GetService(typeof(CmsContext))!)
 			{
 				cmsContext.Database.EnsureDeleted();
 				cmsContext.Database.Migrate();
@@ -44,7 +44,7 @@ namespace DotNetCMS.Program.Tests
 		{
 			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
 			var postContentDocument = await postResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			var pageId = postContentDocument.RootElement.GetProperty("id").GetGuid();
+			var pageId = postContentDocument!.RootElement.GetProperty("id").GetGuid();
 
 			Assert.Equal(new Uri($"http://localhost/Pages/{pageId}"), postResponse.Headers.Location);
 			Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
@@ -56,7 +56,7 @@ namespace DotNetCMS.Program.Tests
 			Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
 			var getContentDocument = await getResponse.Content.ReadFromJsonAsync<JsonDocument>();
 
-			Assert.Equal(pageId, getContentDocument.RootElement.GetProperty("id").GetGuid());
+			Assert.Equal(pageId, getContentDocument!.RootElement.GetProperty("id").GetGuid());
 			Assert.Equal("Page Title 1", getContentDocument.RootElement.GetProperty("title").GetString());
 		}
 	}
