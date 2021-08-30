@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace DotNetCMS.Program.Tests
@@ -43,21 +44,34 @@ namespace DotNetCMS.Program.Tests
 		public async void PostPageAsync()
 		{
 			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
-			var postContentDocument = await postResponse.Content.ReadFromJsonAsync<JsonDocument>();
-			var pageId = postContentDocument!.RootElement.GetProperty("id").GetGuid();
+			var createdPage = await GetPageFromResponse(postResponse);
+			var createdPageId = GetIdFromPage(createdPage);
 
-			Assert.Equal(new Uri($"http://localhost/Pages/{pageId}"), postResponse.Headers.Location);
+			Assert.Equal(new Uri($"http://localhost/Pages/{createdPageId}"), postResponse.Headers.Location);
 			Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
+			Assert.Equal("Page Title 1", GetTitleFromPage(createdPage));
 
-			Assert.Equal("Page Title 1", postContentDocument.RootElement.GetProperty("title").GetString());
-
-			var getResponse = await _client.GetAsync($"/Pages/{pageId}");
-
+			var getResponse =  await _client.GetAsync($"/Pages/{createdPageId}");
 			Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
-			var getContentDocument = await getResponse.Content.ReadFromJsonAsync<JsonDocument>();
+			var loadedPage = await GetPageFromResponse(getResponse);
 
-			Assert.Equal(pageId, getContentDocument!.RootElement.GetProperty("id").GetGuid());
-			Assert.Equal("Page Title 1", getContentDocument.RootElement.GetProperty("title").GetString());
+			Assert.Equal(createdPageId, GetIdFromPage(loadedPage));
+			Assert.Equal("Page Title 1", GetTitleFromPage(loadedPage));
+		}
+
+		private async Task<JsonDocument> GetPageFromResponse(HttpResponseMessage response)
+		{
+			return (await response.Content.ReadFromJsonAsync<JsonDocument>())!;
+		}
+
+		private Guid GetIdFromPage(JsonDocument page)
+		{
+			return page.RootElement.GetProperty("id").GetGuid();
+		}
+
+		private string GetTitleFromPage(JsonDocument page)
+		{
+			return page.RootElement.GetProperty("title").GetString()!;
 		}
 	}
 }

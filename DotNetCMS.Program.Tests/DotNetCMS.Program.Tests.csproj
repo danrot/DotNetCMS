@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetCMS.Persistence.EntityFrameworkCore\DotNetCMS.Persistence.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\DotNetCMS.Program\DotNetCMS.Program.csproj" />
+    <ProjectReference Include="..\DotNetCMS.Domain\DotNetCMS.Domain.csproj" />
   </ItemGroup>
 
 </Project>
