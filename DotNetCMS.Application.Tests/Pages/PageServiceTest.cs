@@ -27,15 +27,11 @@ namespace DotNetCMS.Application.Test.Pages
 		[Fact]
 		public async void GetAllAsync()
 		{
-			var page1 = new Page("Page Title 1");
-			Guid pageId1 = page1.Id;
-			var page2 = new Page("Page Title 2");
-			Guid pageId2 = page2.Id;
-
-			_pageRepository.Add(page1);
-			_pageRepository.Add(page2);
+			var page1 = CreatePage("Page Title 1");
+			var page2 = CreatePage("Page Title 2");
 
 			var pages = await _pageService.GetAllAsync();
+
 			Assert.Equal(2, pages.Count);
 			Assert.Contains(pages, page => page.Title == "Page Title 1");
 			Assert.Contains(pages, page => page.Title == "Page Title 2");
@@ -44,8 +40,7 @@ namespace DotNetCMS.Application.Test.Pages
 		[Fact]
 		public async void GetAsync()
 		{
-			var page1 = new Page("Page Title 1");
-			_pageRepository.Add(page1);
+			var page1 = CreatePage("Page Title 1");
 
 			Assert.Same(page1, await _pageService.GetAsync(new GetCommand(page1.Id)));
 		}
@@ -61,6 +56,7 @@ namespace DotNetCMS.Application.Test.Pages
 		{
 			var page1 = _pageService.Create(new CreateCommand("Page Title 1"));
 			Assert.Equal("Page Title 1", page1.Title);
+
 			var page2 = _pageService.Create(new CreateCommand("Page Title 2"));
 			Assert.Equal("Page Title 2", page2.Title);
 
@@ -73,17 +69,15 @@ namespace DotNetCMS.Application.Test.Pages
 		[Fact]
 		public async void UpdateAsync()
 		{
-			var page = new Page("Page Title");
-			var pageId = page.Id;
-			_pageRepository.Add(page);
+			var page = CreatePage("Page Title");
 
-			page = await _pageService.UpdateAsync(new UpdateCommand(page.Id, "Updated Page Title"));
-			Assert.Equal(pageId, page.Id);
-			Assert.Equal("Updated Page Title", page.Title);
+			var updatedPage = await _pageService.UpdateAsync(new UpdateCommand(page.Id, "Updated Page Title"));
+			Assert.Equal(page.Id, updatedPage.Id);
+			Assert.Equal("Updated Page Title", updatedPage.Title);
 
-			page = await _pageRepository.GetByIdAsync(pageId);
-			Assert.Equal(pageId, page!.Id);
-			Assert.Equal("Updated Page Title", page.Title);
+			page = await _pageRepository.GetByIdAsync(page.Id);
+			Assert.Equal(page!.Id, updatedPage!.Id);
+			Assert.Equal("Updated Page Title", updatedPage.Title);
 		}
 
 		[Fact]
@@ -97,14 +91,12 @@ namespace DotNetCMS.Application.Test.Pages
 		[Fact]
 		public async void DeleteAsync()
 		{
-			var page = new Page("Page Title");
-			var pageId = page.Id;
-			_pageRepository.Add(page);
+			var page = CreatePage("Page Title");
 
 			await _pageService.DeleteAsync(new DeleteCommand(page.Id));
 
-			page = await _pageRepository.GetByIdAsync(pageId);
-			Assert.Null(page);
+			var deletedPage = await _pageRepository.GetByIdAsync(page.Id);
+			Assert.Null(deletedPage);
 		}
 
 		[Fact]
@@ -113,6 +105,14 @@ namespace DotNetCMS.Application.Test.Pages
 			await Assert.ThrowsAsync<PageNotFoundException>(
 				() => _pageService.DeleteAsync(new DeleteCommand(Guid.Empty))
 			);
+		}
+
+		private Page CreatePage(string title)
+		{
+			var page = new Page(title);
+			_pageRepository.Add(page);
+
+			return page;
 		}
 	}
 }

@@ -32,20 +32,15 @@ namespace DotNetCMS.Persistence.Test.Pages
 		public async void GetAllNonEmpty()
 		{
 			var pageRepository = CreatePageRepository();
-
-			var page1 = new Page("Page Title 1");
-			Guid pageId1 = page1.Id;
-			var page2 = new Page("Page Title 2");
-			Guid pageId2 = page2.Id;
-
-			pageRepository.Add(page1);
-			pageRepository.Add(page2);
+			var page1 = CreatePage(pageRepository, "Page Title 1");
+			var page2 = CreatePage(pageRepository, "Page Title 2");
 
 			SaveChanges();
 			Clear();
 
 			pageRepository = CreatePageRepository();
 			var pages = await pageRepository.GetAllAsync();
+
 			Assert.Equal(2, pages.Count);
 			Assert.Contains(pages, page => page.Title == "Page Title 1");
 			Assert.Contains(pages, page => page.Title == "Page Title 2");
@@ -55,53 +50,37 @@ namespace DotNetCMS.Persistence.Test.Pages
 		public async void Add()
 		{
 			var pageRepository = CreatePageRepository();
-
-			var page1 = new Page("Page Title 1");
-			Guid pageId1 = page1.Id;
-			var page2 = new Page("Page Title 2");
-			Guid pageId2 = page2.Id;
-
-			pageRepository.Add(page1);
-			pageRepository.Add(page2);
+			var page1 = CreatePage(pageRepository, "Page Title 1");
+			var page2 = CreatePage(pageRepository, "Page Title 2");
 
 			SaveChanges();
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			Assert.Equal("Page Title 1", (await pageRepository.GetByIdAsync(pageId1))!.Title);
-			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2))!.Title);
+			Assert.Equal("Page Title 1", (await pageRepository.GetByIdAsync(page1.Id))!.Title);
+			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(page2.Id))!.Title);
 		}
 
 		[Fact]
 		public async void Update()
 		{
 			var pageRepository = CreatePageRepository();
-
-			var page1 = new Page("Page Title 1");
-			Guid pageId1 = page1.Id;
-			var page2 = new Page("Page Title 2");
-			Guid pageId2 = page2.Id;
-
-			pageRepository.Add(page1);
-			pageRepository.Add(page2);
+			var page1 = CreatePage(pageRepository, "Page Title 1");
+			var page2 = CreatePage(pageRepository, "Page Title 2");
 
 			SaveChanges();
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			page1 = await pageRepository.GetByIdAsync(pageId1);
-			page2 = await pageRepository.GetByIdAsync(pageId2);
-			Assert.Equal("Page Title 1", page1!.Title);
-			Assert.Equal("Page Title 2", page2!.Title);
-
-			page1.ChangeTitle("Updated Page Title 1");
+			var updatePage1 = await pageRepository.GetByIdAsync(page1.Id);
+			updatePage1!.ChangeTitle("Updated Page Title 1");
 
 			SaveChanges();
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			Assert.Equal("Updated Page Title 1", (await pageRepository.GetByIdAsync(pageId1))!.Title);
-			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2))!.Title);
+			Assert.Equal("Updated Page Title 1", (await pageRepository.GetByIdAsync(page1.Id))!.Title);
+			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(page2.Id))!.Title);
 		}
 
 		[Fact]
@@ -109,31 +88,30 @@ namespace DotNetCMS.Persistence.Test.Pages
 		{
 			var pageRepository = CreatePageRepository();
 
-			var page1 = new Page("Page Title 1");
-			Guid pageId1 = page1.Id;
-			var page2 = new Page("Page Title 2");
-			Guid pageId2 = page2.Id;
-
-			pageRepository.Add(page1);
-			pageRepository.Add(page2);
+			var page1 = CreatePage(pageRepository, "Page Title 1");
+			var page2 = CreatePage(pageRepository, "Page Title 2");
 
 			SaveChanges();
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			page1 = await pageRepository.GetByIdAsync(pageId1);
-			page2 = await pageRepository.GetByIdAsync(pageId2);
-			Assert.Equal("Page Title 1", page1!.Title);
-			Assert.Equal("Page Title 2", page2!.Title);
-
-			pageRepository.Remove(page1);
+			var deletePage1 = await pageRepository.GetByIdAsync(page1.Id);
+			pageRepository.Remove(deletePage1!);
 
 			SaveChanges();
 			Clear();
 
 			pageRepository = CreatePageRepository();
-			Assert.Null(await pageRepository.GetByIdAsync(pageId1));
-			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(pageId2))!.Title);
+			Assert.Null(await pageRepository.GetByIdAsync(page1.Id));
+			Assert.Equal("Page Title 2", (await pageRepository.GetByIdAsync(page2.Id))!.Title);
+		}
+
+		private Page CreatePage(IPageRepository pageRepository, string title)
+		{
+			var page = new Page(title);
+			pageRepository.Add(page);
+
+			return page;
 		}
 	}
 }

@@ -11,6 +11,7 @@ namespace DotNetCMS.Domain.Tests.Pages
 		public void ConstructWithTitle(string title)
 		{
 			var page = new Page(title);
+
 			Assert.Equal(title, page.Title);
 			Assert.NotEqual(Guid.Empty, page.Id);
 		}
