@@ -28,7 +28,8 @@ namespace DotNetCMS.Rest.Controllers
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Page>> GetPage([FromRoute] GetCommand getCommand)
 		{
-			try {
+			try
+			{
 				var page = await _pageService.GetAsync(getCommand);
 
 				return page;
@@ -58,7 +59,8 @@ namespace DotNetCMS.Rest.Controllers
 				);
 			}
 
-			try {
+			try
+			{
 				var page = await _pageService.UpdateAsync(updateCommand);
 
 				return page;
@@ -72,7 +74,8 @@ namespace DotNetCMS.Rest.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeletePage([FromRoute] DeleteCommand deleteCommand)
 		{
-			try {
+			try
+			{
 				await _pageService.DeleteAsync(deleteCommand);
 
 				return NoContent();

@@ -39,7 +39,7 @@ namespace DotNetCMS.Program.Tests
 					.Configure(app =>
 					{
 						app.UseRouting();
-						app.UseEndpoints(endpoints =>  endpoints.MapControllers());
+						app.UseEndpoints(endpoints => endpoints.MapControllers());
 					})
 			);
 
@@ -59,8 +59,8 @@ namespace DotNetCMS.Program.Tests
 		[Fact]
 		public async void GetPagesAsync()
 		{
-			await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
-			await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 2"});
+			await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1" });
+			await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 2" });
 
 			var getResponse = await _client.GetAsync("/Pages");
 			var loadedPages = await GetPagesFromResponse(getResponse);
@@ -76,7 +76,7 @@ namespace DotNetCMS.Program.Tests
 		[Fact]
 		public async void GetPageAsync()
 		{
-			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title"});
+			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title" });
 			var createdPage = await GetPageFromResponse(postResponse);
 			var createdPageId = GetIdFromPage(createdPage);
 
@@ -98,7 +98,7 @@ namespace DotNetCMS.Program.Tests
 		[Fact]
 		public async void PostPageAsync()
 		{
-			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
+			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1" });
 			var createdPage = await GetPageFromResponse(postResponse);
 			var createdPageId = GetIdFromPage(createdPage);
 
@@ -118,14 +118,14 @@ namespace DotNetCMS.Program.Tests
 		[Fact]
 		public async void PostPageWithoutTitleAsync()
 		{
-			var postResponse = await _client.PostAsJsonAsync("/Pages", new {});
+			var postResponse = await _client.PostAsJsonAsync("/Pages", new { });
 			Assert.Equal(HttpStatusCode.BadRequest, postResponse.StatusCode);
 		}
 
 		[Fact]
 		public async void PutPageAsync()
 		{
-			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
+			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1" });
 			var createdPage = await GetPageFromResponse(postResponse);
 			var pageId = GetIdFromPage(createdPage);
 			Assert.Equal("Page Title 1", GetTitleFromPage(createdPage));
@@ -136,7 +136,7 @@ namespace DotNetCMS.Program.Tests
 
 			var putResponse = await _client.PutAsJsonAsync(
 				$"/Pages/{pageId}",
-				new { Id = pageId, Title = "Updated Page Title 1"}
+				new { Id = pageId, Title = "Updated Page Title 1" }
 			);
 			var updatedPage = await GetPageFromResponse(putResponse);
 			Assert.Equal(HttpStatusCode.OK, putResponse.StatusCode);
@@ -152,7 +152,7 @@ namespace DotNetCMS.Program.Tests
 		{
 			var putResponse = await _client.PutAsJsonAsync(
 				$"/Pages/{Guid.NewGuid()}",
-				new { Id = Guid.NewGuid(), Title = "Updated Page Title 1"}
+				new { Id = Guid.NewGuid(), Title = "Updated Page Title 1" }
 			);
 			Assert.Equal(HttpStatusCode.BadRequest, putResponse.StatusCode);
 		}
@@ -163,7 +163,7 @@ namespace DotNetCMS.Program.Tests
 			var pageId = Guid.NewGuid();
 			var putResponse = await _client.PutAsJsonAsync(
 				$"/Pages/{pageId}",
-				new { Id = pageId, Title = "Updated Page Title"}
+				new { Id = pageId, Title = "Updated Page Title" }
 			);
 
 			Assert.Equal(HttpStatusCode.NotFound, putResponse.StatusCode);
@@ -172,7 +172,7 @@ namespace DotNetCMS.Program.Tests
 		[Fact]
 		public async void DeletePageAsync()
 		{
-			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
+			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1" });
 			var createdPage = await GetPageFromResponse(postResponse);
 			var createdPageId = GetIdFromPage(createdPage);
 

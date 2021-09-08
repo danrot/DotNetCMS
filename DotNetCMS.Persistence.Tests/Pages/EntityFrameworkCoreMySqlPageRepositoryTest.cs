@@ -17,6 +17,6 @@ namespace DotNetCMS.Persistence.Test.Pages
 					.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString))
 					.Options
 			)
-		{}
+		{ }
 	}
 }

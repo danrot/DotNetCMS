@@ -33,7 +33,7 @@ namespace DotNetCMS.Program.Tests
 
 			_client = _server.CreateClient();
 
-			using (var cmsContext = (CmsContext) _server.Host.Services.GetService(typeof(CmsContext))!)
+			using (var cmsContext = (CmsContext)_server.Host.Services.GetService(typeof(CmsContext))!)
 			{
 				cmsContext.Database.EnsureDeleted();
 				cmsContext.Database.Migrate();
@@ -43,7 +43,7 @@ namespace DotNetCMS.Program.Tests
 		[Fact]
 		public async void PostPageAsync()
 		{
-			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1"});
+			var postResponse = await _client.PostAsJsonAsync("/Pages", new { Title = "Page Title 1" });
 			var createdPage = await GetPageFromResponse(postResponse);
 			var createdPageId = GetIdFromPage(createdPage);
 
@@ -51,7 +51,7 @@ namespace DotNetCMS.Program.Tests
 			Assert.Equal(HttpStatusCode.Created, postResponse.StatusCode);
 			Assert.Equal("Page Title 1", GetTitleFromPage(createdPage));
 
-			var getResponse =  await _client.GetAsync($"/Pages/{createdPageId}");
+			var getResponse = await _client.GetAsync($"/Pages/{createdPageId}");
 			Assert.Equal(HttpStatusCode.OK, getResponse.StatusCode);
 			var loadedPage = await GetPageFromResponse(getResponse);
 

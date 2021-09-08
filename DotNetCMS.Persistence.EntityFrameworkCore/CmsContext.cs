@@ -7,7 +7,7 @@ namespace DotNetCMS.Persistence.EntityFrameworkCore
 	{
 		public DbSet<Page> Pages => Set<Page>();
 
-		public CmsContext(DbContextOptions<CmsContext> options) : base(options) {}
+		public CmsContext(DbContextOptions<CmsContext> options) : base(options) { }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

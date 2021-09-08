@@ -8,15 +8,15 @@ namespace DotNetCMS.Persistence.Test.Pages
 	{
 		private readonly IPageRepository _pageRepository = new PageRepository();
 
-		protected override void SaveChanges() {}
+		protected override void SaveChanges() { }
 
 		protected override IPageRepository CreatePageRepository()
 		{
 			return _pageRepository;
 		}
 
-		protected override void Clear() {}
+		protected override void Clear() { }
 
-		public void Dispose() {}
+		public void Dispose() { }
 	}
 }
