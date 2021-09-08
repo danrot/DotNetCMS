@@ -24,4 +24,6 @@ jobs:
                   dotnet-version: ${{ matrix.dotnet-version }}
             - run: dotnet restore
             - run: dotnet build
+            - run: dotnet tool restore
+            - run: dotnet format --check
             - run: dotnet test
