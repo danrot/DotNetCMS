@@ -23,5 +23,5 @@ jobs:
               with:
                   dotnet-version: ${{ matrix.dotnet-version }}
             - run: dotnet restore
-            - run: dotnet build
+            - run: dotnet build --no-restore
             - run: dotnet test
