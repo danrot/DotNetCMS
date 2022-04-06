@@ -1,9 +1,6 @@
-using System;
+namespace DotNetCMS.Application.Pages;
 
-namespace DotNetCMS.Application.Pages
+public sealed class PageNotFoundException : Exception
 {
-	public sealed class PageNotFoundException : Exception
-	{
-		public PageNotFoundException(Guid id) : base($"The page with the ID {id} does not exist") {}
-	}
+	public PageNotFoundException(Guid id) : base($"The page with the ID {id} does not exist") {}
 }

@@ -1,20 +1,37 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using DotNetCMS.Application.Pages;
+using DotNetCMS.Domain.Pages;
+using DotNetCMS.Persistence.EntityFrameworkCore;
+using DotNetCMS.Persistence.EntityFrameworkCore.Pages;
+using DotNetCMS.Persistence.EntityFrameworkCore.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace DotNetCMS.Program
+var builder = WebApplication.CreateBuilder(args);
+
+string connectionString = builder.Configuration.GetConnectionString("DotNetCMS");
+
+builder.Services.AddControllers(options =>
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			CreateHostBuilder(args).Build().Run();
-		}
+	options.Filters.Add(typeof(TransactionFilter));
+});
 
-		public static IHostBuilder CreateHostBuilder(string[] args) =>
-			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder =>
-				{
-					webBuilder.UseStartup<Startup>();
-				});
-	}
+builder.Services.AddDbContext<CmsContext>(
+	options => options.UseMySql(
+		connectionString,
+		ServerVersion.AutoDetect(connectionString),
+		sqlOptions => sqlOptions.MigrationsAssembly("DotNetCMS.Program")
+	)
+);
+
+builder.Services.AddScoped<IPageRepository, PageRepository>();
+builder.Services.AddScoped<PageService>();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+	app.UseDeveloperExceptionPage();
 }
+
+app.MapControllers();
+
+app.Run();

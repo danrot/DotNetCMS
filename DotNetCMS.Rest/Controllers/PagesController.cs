@@ -1,10 +1,7 @@
 using DotNetCMS.Application.Pages;
 using DotNetCMS.Domain.Pages;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace DotNetCMS.Rest.Controllers
 {
