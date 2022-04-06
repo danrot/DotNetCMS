@@ -1,6 +1,3 @@
-using System;
+namespace DotNetCMS.Application.Pages;
 
-namespace DotNetCMS.Application.Pages
-{
-	public sealed record DeleteCommand(Guid Id);
-}
+public sealed record DeleteCommand(Guid Id);
